@@ -22,23 +22,23 @@ let controlSwitchCheck = () => {
             break;
     }
 }
-let switchFunction = () => {
-    if (switcher.checked) {
-        localStorage.clear()
-        localStorage.setItem('theme', 'dark-theme')
-        document.querySelector('body').classList.add(localStorage.getItem('theme'))
-        if (document.querySelector('body').classList.contains(Theme.LIGHT)) {
-            document.querySelector('body').classList.remove(Theme.LIGHT)
-        }
-        switcher.setAttribute('checked', 'true');
+let saveTheme = (localTheme, classTheme) => {
+    localStorage.clear()
+    localStorage.setItem('theme', localTheme)
+    document.querySelector('body').classList.add(localStorage.getItem('theme'))
+    if (document.querySelector('body').classList.contains(classTheme)) {
+        document.querySelector('body').classList.remove(classTheme)
+    }
+    if (localTheme.includes('dark')){
+        switcher.setAttribute('checked', 'true')}
+    switcher.removeAttribute('checked')
+    ;
+}
+let switchFunction = (e) => {
+    if (e.target.checked) {
+        saveTheme('dark-theme', Theme.LIGHT)
     } else {
-        localStorage.clear()
-        localStorage.setItem('theme', 'light-theme')
-        document.querySelector('body').classList.add(localStorage.getItem('theme'))
-        if (document.querySelector('body').classList.contains(Theme.DARK)) {
-            document.querySelector('body').classList.remove(Theme.DARK)
-        }
-        switcher.removeAttribute('checked')
+        saveTheme('light-theme', Theme.DARK)
     }
 }
 controlSwitchCheck();
