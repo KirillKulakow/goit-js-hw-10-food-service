@@ -15,8 +15,10 @@ let switcher = document.querySelector('#theme-switch-control');
 
 const controlSwitchCheck = () => {
     if (document.querySelector('body').classList.contains(Theme.DARK)) {
-            return switcher.setAttribute('checked', 'true');}
+        switcher.setAttribute('checked', 'true');
+    } else {
         switcher.removeAttribute('checked');
+    };
 };
 
 const saveTheme = (localTheme, classTheme) => {
@@ -27,16 +29,18 @@ const saveTheme = (localTheme, classTheme) => {
         document.querySelector('body').classList.remove(classTheme);
     };
     if (localTheme.includes('dark')){
-        return switcher.setAttribute('checked', 'true');
+        switcher.setAttribute('checked', 'true');
+    } else {
+        switcher.removeAttribute('checked');
     };
-    switcher.removeAttribute('checked');
 };
 
 const switchFunction = (e) => {
     if (e.target.checked) {
-       return saveTheme('dark-theme', Theme.LIGHT);
+       saveTheme('dark-theme', Theme.LIGHT);
+    } else {
+        saveTheme('light-theme', Theme.DARK);
     };
-    saveTheme('light-theme', Theme.DARK);
 };
 
 controlSwitchCheck();
